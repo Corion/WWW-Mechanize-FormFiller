@@ -174,13 +174,13 @@ WWW::Mechanize::FormFiller - framework to automate HTML forms
 You are not limited to fixed form values - callbacks and interactive
 editing are also already provided :
 
-=for example_testing
+=for example
   no warnings 'once';
   require HTML::Form;
   require WWW::Mechanize::FormFiller::Value::Interactive;
-  *WWW::Mechanize::FormFiller::Value::Interactive::ask_value = sub { "s3[r3t" }; #<-- not a good password
+  local *WWW::Mechanize::FormFiller::Value::Interactive::ask_value = sub { "s3[r3t" }; #<-- not a good password
 
-=begin example
+=for example begin
 
   # Create a form filler that asks us for the password
 
@@ -204,7 +204,7 @@ editing are also already provided :
   # LWP::UserAgent or (preferrably) WWW::Mechanize
   print $request->as_string;
 
-=end example
+=for example end
 
 =for example_testing
   isa_ok($f,"WWW::Mechanize::FormFiller");
@@ -323,7 +323,7 @@ to the following examples :
 =for example_testing
   isa_ok($filler,"WWW::Mechanize::FormFiller");
   is($form->value('name'),'Mark','Name is set');
-  like($form->value('motto'),qr/^\w+( \w+ ){3}\w+$/,'Motto is set');
+  like($form->value('motto'),qr/^\w+( \w+){3} \w+$/,'Motto is set');
 
 =for example
   $form2 = HTML::Form->parse('<html><body><form>
@@ -344,7 +344,7 @@ to the following examples :
 =for example_testing
   isa_ok($filler,"WWW::Mechanize::FormFiller");
   is($form2->value('name'),'Mark','Name is set');
-  like($form2->value('motto'),qr/^\w+( \w+ ){3}\w+$/,'Motto is set');
+  like($form2->value('motto'),qr/^\w+( \w+){3} \w+$/,'Motto is set');
 
 =back
 
