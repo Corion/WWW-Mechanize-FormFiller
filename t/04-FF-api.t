@@ -99,7 +99,7 @@ SKIP: {
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout($form, name => 'Mark' );
-  isa_ok($f,'WWW::Mechanize::FormFiller');
+  isa_ok($f,WWW::Mechanize::FormFiller);
   is($form->value('name'),'Mark','fillout has a default of Fixed');
 };
 
@@ -111,7 +111,7 @@ SKIP: {
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout($form, name => [ Random => 'Mark' ]);
-  isa_ok($f,'WWW::Mechanize::FormFiller');
+  isa_ok($f,WWW::Mechanize::FormFiller);
   is($form->value('name'),'Mark','Other classes work as well');
 };
 
@@ -123,6 +123,6 @@ SKIP: {
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout(name => [ Random => 'Mark' ], $form);
-  isa_ok($f,'WWW::Mechanize::FormFiller');
+  isa_ok($f,WWW::Mechanize::FormFiller);
   is($form->value('name'),'Mark','The place of $form is irrelevant');
 };
