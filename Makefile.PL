@@ -7,8 +7,10 @@ use lib 'lib';
 WriteMakefile(
     'NAME'    => 'WWW::Mechanize::FormFiller',
     'VERSION_FROM'  => 'lib/WWW/Mechanize/FormFiller.pm', # finds $VERSION
-    'PREREQ_PM'    => { 'HTML::Form' => undef, 
-    										'Test::More' => undef }, # e.g., Module::Name => 1.1
+    'PREREQ_PM'    => { 'HTML::Form' => undef,
+    										'Test::More' => undef,
+    										'Data::Random' => 0.05,
+    									}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM => 'lib/WWW/Mechanize/FormFiller.pm', # retrieve abstract from module
        AUTHOR     => 'Max Maischein <corion@cpan.org>') : ()),
