@@ -24,6 +24,7 @@ WWW::Mechanize::FormFiller::Value::Keep - Leave an HTML field alone
 =head1 SYNOPSIS
 
 =begin example
+
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Keep;
 

@@ -31,6 +31,7 @@ WWW::Mechanize::FormFiller::Value - Base class for HTML form values
 =head1 SYNOPSIS
 
 =begin example
+
   # This class is not used directly
 
 =end example

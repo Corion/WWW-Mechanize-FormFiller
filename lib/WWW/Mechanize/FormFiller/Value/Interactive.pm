@@ -32,6 +32,7 @@ WWW::Mechanize::FormFiller::Value::Interactive - Ask the user to fill out a HTML
 =head1 SYNOPSIS
 
 =begin example
+
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Interactive;
 

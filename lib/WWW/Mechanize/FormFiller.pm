@@ -118,6 +118,7 @@ WWW::Mechanize::FormFiller - framework to automate HTML forms
 =head1 SYNOPSIS
 
 =begin example
+
   use strict;
   use WWW::Mechanize::FormFiller;
   use HTML::Form;

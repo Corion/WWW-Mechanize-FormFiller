@@ -24,6 +24,7 @@ WWW::Mechanize::FormFiller::Value::Fixed - Fill a fixed value into an HTML form 
 =head1 SYNOPSIS
 
 =begin example
+
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Fixed;
 

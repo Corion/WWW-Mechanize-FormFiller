@@ -57,6 +57,7 @@ eval q{
     local $^W = 0;
 
 #line 121 lib/WWW/Mechanize/FormFiller.pm
+
   use strict;
   use WWW::Mechanize::FormFiller;
   use HTML::Form;
@@ -124,6 +125,7 @@ SKIP: {
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
 #line 121 lib/WWW/Mechanize/FormFiller.pm
+
   use strict;
   use WWW::Mechanize::FormFiller;
   use HTML::Form;
@@ -184,7 +186,7 @@ eval q{
   my $example = sub {
     local $^W = 0;
 
-#line 159 lib/WWW/Mechanize/FormFiller.pm
+#line 160 lib/WWW/Mechanize/FormFiller.pm
 
   # Create a form filler that asks us for the password
 
@@ -215,7 +217,7 @@ eval q{
 
   }
 };
-is($@, '', "example from line 159");
+is($@, '', "example from line 160");
 
 };
 SKIP: {
@@ -225,7 +227,7 @@ SKIP: {
     {
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
-#line 159 lib/WWW/Mechanize/FormFiller.pm
+#line 160 lib/WWW/Mechanize/FormFiller.pm
 
   # Create a form filler that asks us for the password
 
@@ -279,7 +281,7 @@ eval q{
   my $example = sub {
     local $^W = 0;
 
-#line 214 lib/WWW/Mechanize/FormFiller.pm
+#line 215 lib/WWW/Mechanize/FormFiller.pm
 
   # This filler fills all unspecified fields
   # with the string "<purposedly left blank>"
@@ -304,7 +306,7 @@ eval q{
 
   }
 };
-is($@, '', "example from line 214");
+is($@, '', "example from line 215");
 
 };
 SKIP: {

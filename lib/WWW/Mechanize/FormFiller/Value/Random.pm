@@ -36,6 +36,7 @@ WWW::Mechanize::FormFiller::Value::Random - Randomly fill out a HTML form field
 =head1 SYNOPSIS
 
 =begin example
+
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Random;
 

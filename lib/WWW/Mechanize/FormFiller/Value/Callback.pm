@@ -28,6 +28,7 @@ WWW::Mechanize::FormFiller::Value::Callback - Call Perl code to fill out a HTML 
 =head1 SYNOPSIS
 
 =begin example
+
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Callback;
 
