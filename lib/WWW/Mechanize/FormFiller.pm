@@ -143,33 +143,35 @@ WWW::Mechanize::FormFiller - framework to automate HTML forms
 
 =begin example
 
-  use strict;
   use WWW::Mechanize::FormFiller;
   use HTML::Form;
 
   # Create a form filler that fills out google for my homepage
 
   my $html = "<html><body><form name='f' action='http://www.google.com/search'>
-      <input type='text' name='q'>
-      <input type='submit' name=btnG value='Google Search'>
+      <input type='text' name='q' value='' />
+      <input type='submit' name=btnG value='Google Search' />
       <input type='hidden' name='secretValue' value='0xDEADBEEF' />
     </form></body></html>";
 
-  my $f = WWW::Mechanize::FormFiller->new( q => [Fixed => "Corion Homepage"] );
+  my $f = WWW::Mechanize::FormFiller->new( 
+      values => [
+                 [q => Fixed => "Corion Homepage"],
+  							]);
   my $form = HTML::Form->parse($html,"http://www.google.com/intl/en/");
   $f->fill_form($form);
 
   my $request = $form->click("btnG");
   # Now we have a complete HTTP request, which we can hand off to
   # LWP::UserAgent or (preferrably) WWW::Mechanize
-
+  
   print $request->as_string;
 
 =end example
 
 =for example_testing
   $_STDOUT_ =~ s/[\x0a\x0d]+$//;
-  is($_STDOUT_,"GET http://www.google.com/search?btnG=Google+Search&secretValue=0xDEADBEEF",'Got the expected HTTP query string');
+  is($_STDOUT_,"GET http://www.google.com/search?q=Corion+Homepage&btnG=Google+Search&secretValue=0xDEADBEEF",'Got the expected HTTP query string');
 
 You are not limited to fixed form values - callbacks and interactive
 editing are also already provided :
@@ -246,8 +248,8 @@ Example :
   # and asks for a password
   my $f = WWW::Mechanize::FormFiller->new(
                        values => [[ login => Fixed => "corion" ],
-                                  [ password => Interactive => [],
-                                 ]]);
+                                  [ password => Interactive => []],
+                                 ]);
 
   # This filler only fills in a username
   # if it is the empty string, and still asks for the password :
