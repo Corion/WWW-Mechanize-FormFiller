@@ -8,6 +8,7 @@ $VERSION = '0.04';
 sub new {
   my ($class,$name,$coderef) = @_;
   my $self = $class->SUPER::new($name);
+  
   $self->{callback} = $coderef;
 
   $self;
@@ -15,6 +16,7 @@ sub new {
 
 sub value {
   my ($self,$input) = @_;
+  no strict 'refs';
   $self->{callback}->($self,$input);
 };
 
