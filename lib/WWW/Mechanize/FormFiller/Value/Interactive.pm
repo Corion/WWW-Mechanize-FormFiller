@@ -1,5 +1,6 @@
 package WWW::Mechanize::FormFiller::Value::Interactive;
 use base 'WWW::Mechanize::FormFiller::Value::Callback';
+use strict;
 
 use vars qw( $VERSION );
 $VERSION = 0.03;

@@ -51,7 +51,7 @@ eval q{
   my $example = sub {
     local $^W = 0;
 
-#line 39 lib/WWW/Mechanize/FormFiller/Value/Random.pm
+#line 40 lib/WWW/Mechanize/FormFiller/Value/Random.pm
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Random;
@@ -76,7 +76,7 @@ eval q{
 
   }
 };
-is($@, '', "example from line 39");
+is($@, '', "example from line 40");
 
 };
 SKIP: {
@@ -101,7 +101,7 @@ SKIP: {
     {
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
-#line 39 lib/WWW/Mechanize/FormFiller/Value/Random.pm
+#line 40 lib/WWW/Mechanize/FormFiller/Value/Random.pm
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Random;

@@ -1,5 +1,7 @@
 package WWW::Mechanize::FormFiller::Value::Random;
+use strict;
 use base 'WWW::Mechanize::FormFiller::Value';
+use Data::Random qw(rand_enum);
 
 use vars qw( $VERSION );
 $VERSION = '0.03';
@@ -21,8 +23,7 @@ sub value {
   # Pick a choice among the allowed values for this input
   # unless we got some prespecified values
   @values = $input->possible_values unless scalar @values;
-
-  $values[rand scalar @values];
+  rand_enum( set => \@values, size => 1 );
 };
 
 1;

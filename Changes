@@ -4,6 +4,10 @@ Revision history for Perl extension WWW::Mechanize::FormFiller.
   - Fixed Makefile.PL for Perl 5.8.0
   - Fixed inline tests
   - Added more inline tests to test the synopses
+  - New prerequisite: Data::Random - to fill out forms with 
+    better random data
+  - Added custom random date generation
+  - Added 'use strict' to all FormFiller::Value::* modules (only cosmetic)
 
 0.02  20030217
   - More tests

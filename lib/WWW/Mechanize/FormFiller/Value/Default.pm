@@ -1,5 +1,6 @@
 package WWW::Mechanize::FormFiller::Value::Default;
 use base 'WWW::Mechanize::FormFiller::Value';
+use strict;
 
 use vars qw( $VERSION );
 $VERSION = 0.03;

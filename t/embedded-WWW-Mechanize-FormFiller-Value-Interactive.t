@@ -51,7 +51,7 @@ eval q{
   my $example = sub {
     local $^W = 0;
 
-#line 35 lib/WWW/Mechanize/FormFiller/Value/Interactive.pm
+#line 36 lib/WWW/Mechanize/FormFiller/Value/Interactive.pm
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Interactive;
@@ -75,7 +75,7 @@ eval q{
 
   }
 };
-is($@, '', "example from line 35");
+is($@, '', "example from line 36");
 
 };
 SKIP: {
@@ -100,7 +100,7 @@ SKIP: {
     {
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
-#line 35 lib/WWW/Mechanize/FormFiller/Value/Interactive.pm
+#line 36 lib/WWW/Mechanize/FormFiller/Value/Interactive.pm
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Interactive;
