@@ -81,9 +81,6 @@ SKIP: {
   skip "Need HTML::Form to test fillout()", 2
     if $@;
   my $form = HTML::Form->parse('<form></form>','http://www.example.com');
-  #my $form = Test::MockObject->new()
-  #           ->fake_module('HTML::Form')
-  #           ->set_list(inputs => []);
   {
     local *Carp::croak = sub { die @_};
     eval { $f = WWW::Mechanize::FormFiller->fillout($form,$form); };
@@ -93,3 +90,4 @@ SKIP: {
     undef $croaked;
   };
 };
+

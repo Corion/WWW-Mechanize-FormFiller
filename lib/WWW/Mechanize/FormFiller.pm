@@ -108,6 +108,30 @@ sub fill_form {
   };
 };
 
+sub fillout {
+  my $self_class = shift;
+  my $self = ref $self_class ? $self_class : $self_class->new();
+  my $form;
+  
+  while (@_) {
+    if (ref $_[0]) {
+      croak "Two HTML::Form objects passed into fillout()" if ($form);
+      $form = shift;
+    } else {
+      my $field = shift;
+      if (ref $_[0] eq 'ARRAY') {
+        my $args = shift;
+        $self->add_filler($field,@$args);
+      } else {
+        my $value = shift;
+        $self->add_filler($field,'Fixed',$value);
+      };
+    };
+  };
+  $self->fill_out($form) if $form;
+  $self;
+};
+
 1;
 __END__
 
@@ -253,6 +277,74 @@ is an object that responds to the interface of C<WWW::Mechanize::FormFiller::Val
 Sets the field values in FORM to the values returned by the
 C<WWW::Mechanize::FormFiller::Value> elements. FORM should be
 of type HTML::Forms or respond to the same interface.
+
+=item fillout @ARGS
+
+This is a very dwimmy routine that allows you to intuitively
+set up values and fill out a form, if needed. It works as both
+a constructor and a method. The parameters are decoded according
+to the following examples :
+
+=for example begin
+
+  $filler = WWW::Mechanize::FormFiller->new();
+  $filler->fillout(
+    # For the the simple case, assumed 'Fixed' class,
+    name => 'Mark',
+
+    # With an array reference, create and fill with the right kind of object.
+    widget_id => [ 'Random', (1..5) ],
+  );
+
+=for example end
+
+=for example_testing
+  isa_ok($filler,"WWW::Mechanize::FormFiller");  
+
+=for example
+  $form = HTML::Form->parse('<html><body><form>
+    <input name="name" type="text" />
+    <input name="motto" type="text" />
+  </form></body></html>','http://www.example.com/');
+
+=for example begin
+
+  $filler = WWW::Mechanize::FormFiller->new();
+  $filler->fillout(
+    # If the first parameter isa HTML::Form, it is 
+    # filled out directly
+    $form,
+    name => 'Mark',
+    motto => [ 'Random::Word', size => 5 ],
+  );
+  
+=for example end
+
+=for example_testing
+  isa_ok($filler,"WWW::Mechanize::FormFiller");
+  is($form->value('name'),'Mark','Name is set');
+  like($form->value('motto'),qr/^\w+( \w+ ){3}\w+$/,'Motto is set');
+
+=for example
+  $form2 = HTML::Form->parse('<html><body><form>
+    <input name="name" type="text" />
+    <input name="motto" type="text" />','http://www.example.com/');
+
+=for example begin
+
+  # This works as a direct constructor as well
+  WWW::Mechanize::FormFiller->fillout(
+    $form2,  
+    name => 'Mark',
+    motto => [ 'Random::Word', size => 5 ],
+  );
+
+=for example end
+
+=for example_testing
+  isa_ok($filler,"WWW::Mechanize::FormFiller");
+  is($form2->value('name'),'Mark','Name is set');
+  like($form2->value('motto'),qr/^\w+( \w+ ){3}\w+$/,'Motto is set');
 
 =back
 
