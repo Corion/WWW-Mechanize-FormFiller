@@ -114,7 +114,7 @@ sub fillout {
   my $form;
   
   while (@_) {
-    if (ref $_[0] and isa($_[0],'HTML::Form')) {
+    if (ref $_[0] and eval { UNIVERSAL::isa($_[0],'HTML::Form') }) {
       croak "Two HTML::Form objects passed into fillout()" if ($form);
       $form = shift;
     } else {
@@ -128,7 +128,7 @@ sub fillout {
       };
     };
   };
-  $self->fill_out($form) if $form;
+  $self->fill_form($form) if $form;
   $self;
 };
 

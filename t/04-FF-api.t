@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 30;
+use Test::More tests => 33;
 
 use_ok("WWW::Mechanize::FormFiller");
 
@@ -93,33 +93,36 @@ SKIP: {
 
 SKIP: {
   eval { require HTML::Form; };
-  skip "Need HTML::Form to test fillout()", 1
+  skip "Need HTML::Form to test fillout()", 2
     if $@;
   my $form = HTML::Form->parse('<form>
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout($form, name => 'Mark' );
+  isa_ok($f,'WWW::Mechanize::FormFiller');
   is($form->value('name'),'Mark','fillout has a default of Fixed');
 };
 
 SKIP: {
   eval { require HTML::Form; };
-  skip "Need HTML::Form to test fillout()", 1
+  skip "Need HTML::Form to test fillout()", 2
     if $@;
   my $form = HTML::Form->parse('<form>
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout($form, name => [ Random => 'Mark' ]);
+  isa_ok($f,'WWW::Mechanize::FormFiller');
   is($form->value('name'),'Mark','Other classes work as well');
 };
 
 SKIP: {
   eval { require HTML::Form; };
-  skip "Need HTML::Form to test fillout()", 1
+  skip "Need HTML::Form to test fillout()", 2
     if $@;
   my $form = HTML::Form->parse('<form>
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout(name => [ Random => 'Mark' ], $form);
+  isa_ok($f,'WWW::Mechanize::FormFiller');
   is($form->value('name'),'Mark','The place of $form is irrelevant');
 };
