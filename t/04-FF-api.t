@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 24;
+use Test::More tests => 27;
 
 use_ok("WWW::Mechanize::FormFiller");
 
@@ -8,7 +8,7 @@ isa_ok($f,"WWW::Mechanize::FormFiller");
 
 # Now check our published API :
 my $meth;
-for $meth (qw(add_filler add_value fill_form)) {
+for $meth (qw(add_filler add_value fill_form fillout )) {
   can_ok($f,$meth);
 };
 
@@ -74,4 +74,22 @@ my $croaked;
   isnt($croaked,undef,"add_filler croaks on invalid parameters");
   like($croaked,qr"A value must have at least a class name and a field name \(which may be undef though\)","Passing an empty classname to add_filler raises an error");
   undef $croaked;
+};
+
+SKIP: {
+  eval { require HTML::Form; };
+  skip "Need HTML::Form to test fillout()", 2
+    if $@;
+  my $form = HTML::Form->parse('<form></form>','http://www.example.com');
+  #my $form = Test::MockObject->new()
+  #           ->fake_module('HTML::Form')
+  #           ->set_list(inputs => []);
+  {
+    local *Carp::croak = sub { die @_};
+    eval { $f = WWW::Mechanize::FormFiller->fillout($form,$form); };
+    $croaked = $@;
+    isnt($croaked,undef,"fillout croaks on double form");
+    like($croaked,qr"Two HTML::Form objects passed into fillout\(\)","Passing two forms to fillout raises an error");
+    undef $croaked;
+  };
 };
