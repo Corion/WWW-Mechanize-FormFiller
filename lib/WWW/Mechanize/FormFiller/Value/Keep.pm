@@ -31,14 +31,24 @@ WWW::Mechanize::FormFiller::Value::Keep - Leave an HTML field alone
   my $f = WWW::Mechanize::FormFiller->new();
 
   # Leave the login field untouched
-  my $login = WWW::Mechanize::FormFiller::Value::Keep->new( login );
+  my $login = WWW::Mechanize::FormFiller::Value::Keep->new( 'login' );
   $f->add_value( login => $login );
 
   # Alternatively take the following shorthand, which adds the
   # field to the list as well :
-  my $sessionid = $f->add_filler( session => Keep );
+  my $sessionid = $f->add_filler( session => 'Keep' );
 
 =for example end
+
+=for example_testing
+  require HTML::Form;
+  my $form = HTML::Form->parse('<html><body><form method=get action=/>
+  <input type=text name=login value=foo />
+  <input type=hidden name=sessionid value=bar />
+  </form></body></html>','http://www.example.com/');
+  $f->fill_form($form);
+  is( $form->value('login'), "foo", "Login gets set");
+  is( $form->value('sessionid'), "bar", "Password gets set");
 
 =head1 DESCRIPTION
 

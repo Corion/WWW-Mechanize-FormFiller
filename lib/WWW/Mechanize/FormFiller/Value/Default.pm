@@ -48,6 +48,23 @@ WWW::Mechanize::FormFiller::Value::Default - Fill a fixed value into an empty HT
 
 =for example end
 
+=for example_testing
+  require HTML::Form;
+  my $form = HTML::Form->parse('<html><body><form method=get action=/>
+  <input type=text name=login />
+  <input type=text name=password />
+  </form></body></html>','http://www.example.com/');
+  $f->fill_form($form);
+  is( $form->value('login'), "Corion", "Login gets set");
+  is( $form->value('password'), "secret", "Password gets set");
+  $form = HTML::Form->parse('<html><body><form method=get action=/>
+  <input type=text name=login value=Test />
+  <input type=text name=password value=geheim />
+  </form></body></html>','http://www.example.com/');
+  $f->fill_form($form);
+  is( $form->value('login'), "Test", "Login gets not overwritten");
+  is( $form->value('password'), "geheim", "Password gets not overwritten");
+
 =head1 DESCRIPTION
 
 This class provides a way to write a fixed value into a HTML field.

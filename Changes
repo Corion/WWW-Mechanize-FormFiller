@@ -1,5 +1,10 @@
 Revision history for Perl extension WWW::Mechanize::FormFiller.
 
+0.03  20030517
+  - Fixed Makefile.PL for Perl 5.8.0
+  - Fixed inline tests
+  - Added more inline tests to test the synopses
+
 0.02  20030217
   - More tests
   - Inline tests

@@ -39,16 +39,27 @@ WWW::Mechanize::FormFiller::Value::Interactive - Ask the user to fill out a HTML
   my $f = WWW::Mechanize::FormFiller->new();
 
   # Ask the user for the "login"
-  my $login = WWW::Mechanize::FormFiller::Value::Callback->new( login );
+  my $login = WWW::Mechanize::FormFiller::Value::Interactive->new( 'login' );
   $f->add_value( login => $login );
 
   # Alternatively take the following shorthand, which adds the
   # field to the list as well :
 
   # "Ask the user for the password"
-  my $password = $f->add_filler( password => Interactive );
+  my $password = $f->add_filler( password => 'Interactive' );
 
 =for example end
+
+=for example_testing
+  require HTML::Form;
+  BEGIN { no warnings 'redefine'; *WWW::Mechanize::FormFiller::Value::Interactive::ask_value = sub {'fixed'}};
+  my $form = HTML::Form->parse('<html><body><form method=get action=/>
+  <input type=text name=login value=foo />
+  <input type=text name=password value=bar />
+  </form></body></html>','http://www.example.com/');
+  $f->fill_form($form);
+  is( $form->value('login'), "fixed", "Login gets set");
+  is( $form->value('password'), "fixed", "Password gets set");
 
 =head1 DESCRIPTION
 

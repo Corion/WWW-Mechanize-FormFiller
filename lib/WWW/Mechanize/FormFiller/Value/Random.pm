@@ -2,7 +2,7 @@ package WWW::Mechanize::FormFiller::Value::Random;
 use base 'WWW::Mechanize::FormFiller::Value';
 
 use vars qw( $VERSION );
-$VERSION = 0.03;
+$VERSION = '0.03';
 
 sub new {
   my ($class,$name,@values) = @_;
@@ -14,19 +14,18 @@ sub new {
 
 sub value {
   my ($self,$input) = @_;
-  #my @values = @{$self->{values}};
-  my @values = $self->{values};
-  my $count = length @values;
+  my @values;
+  @values = @{$self->{values}}
+    if ($self->{values});
 
   # Pick a choice among the allowed values for this input
   # unless we got some prespecified values
-  @values = $input->possible_values unless $count;
+  @values = $input->possible_values unless scalar @values;
 
-  $values[rand $count];
+  $values[rand scalar @values];
 };
 
 1;
-
 
 __END__
 
@@ -55,6 +54,16 @@ WWW::Mechanize::FormFiller::Value::Random - Randomly fill out a HTML form field
   my $password = $f->add_filler( password => Random => "foo","bar","baz" );
 
 =for example end
+
+=for example_testing
+  require HTML::Form;
+  my $form = HTML::Form->parse('<html><body><form method=get action=/>
+  <input type=text name=login />
+  <input type=text name=password />
+  </form></body></html>','http://www.example.com/');
+  $f->fill_form($form);
+  like( $form->value('login'), qr/^(root|administrator|corion)$/, "Login gets set");
+  like( $form->value('password'), qr/^(foo|bar|baz)$/, "Password gets set");
 
 =head1 DESCRIPTION
 

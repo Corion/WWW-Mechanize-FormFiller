@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!D:\Programme\indigoperl-5.6\bin\perl.exe -w
 
 use Test::More 'no_plan';
 
@@ -20,8 +20,9 @@ sub CLOSE {}    # XXX STDERR/STDOUT.  This is not the behavior we want.
 sub READ {}
 sub READLINE {}
 sub GETC {}
+sub BINMODE {}
 
-my $Original_File = 'lib/WWW/Mechanize/FormFiller.pm';
+my $Original_File = 'D:lib\WWW\Mechanize\FormFiller.pm';
 
 package main;
 
@@ -30,7 +31,26 @@ $SIG{__WARN__} = sub { $main::_STDERR_ .= join '', @_; };
 tie *STDOUT, 'Catch', '_STDOUT_' or die $!;
 tie *STDERR, 'Catch', '_STDERR_' or die $!;
 
-    undef $main::_STDOUT_;
+SKIP: {
+    # A header testing whether we find all prerequisites :
+      # Check for module HTML::Form
+  eval { require HTML::Form };
+  skip "Need module HTML::Form to run this test", 1
+    if $@;
+
+  # Check for module WWW::Mechanize::FormFiller
+  eval { require WWW::Mechanize::FormFiller };
+  skip "Need module WWW::Mechanize::FormFiller to run this test", 1
+    if $@;
+
+  # Check for module strict
+  eval { require strict };
+  skip "Need module strict to run this test", 1
+    if $@;
+
+
+    # The original POD test
+        undef $main::_STDOUT_;
     undef $main::_STDERR_;
 eval q{
   my $example = sub {
@@ -76,7 +96,32 @@ eval q{
 };
 is($@, '', "example from line 121");
 
-{
+};
+SKIP: {
+    # A header testing whether we find all prerequisites :
+      # Check for module HTML::Form
+  eval { require HTML::Form };
+  skip "Need module HTML::Form to run this test", 1
+    if $@;
+
+  # Check for module WWW::Mechanize::FormFiller
+  eval { require WWW::Mechanize::FormFiller };
+  skip "Need module WWW::Mechanize::FormFiller to run this test", 1
+    if $@;
+
+  # Check for module WWW::Mechanize::FormFiller::Value::Interactive
+  eval { require WWW::Mechanize::FormFiller::Value::Interactive };
+  skip "Need module WWW::Mechanize::FormFiller::Value::Interactive to run this test", 1
+    if $@;
+
+  # Check for module strict
+  eval { require strict };
+  skip "Need module strict to run this test", 1
+    if $@;
+
+
+    # The original POD test
+    {
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
 #line 121 lib/WWW/Mechanize/FormFiller.pm
@@ -122,10 +167,20 @@ is($@, '', "example from line 121");
     undef $main::_STDERR_;
 }
 
-    undef $main::_STDOUT_;
+};
+SKIP: {
+    # A header testing whether we find all prerequisites :
+    
+    # The original POD test
+        undef $main::_STDOUT_;
     undef $main::_STDERR_;
 
-    undef $main::_STDOUT_;
+};
+SKIP: {
+    # A header testing whether we find all prerequisites :
+    
+    # The original POD test
+        undef $main::_STDOUT_;
     undef $main::_STDERR_;
 eval q{
   my $example = sub {
@@ -164,7 +219,12 @@ eval q{
 };
 is($@, '', "example from line 160");
 
-{
+};
+SKIP: {
+    # A header testing whether we find all prerequisites :
+    
+    # The original POD test
+    {
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
 #line 160 lib/WWW/Mechanize/FormFiller.pm
@@ -202,10 +262,20 @@ is($@, '', "example from line 160");
     undef $main::_STDERR_;
 }
 
-    undef $main::_STDOUT_;
+};
+SKIP: {
+    # A header testing whether we find all prerequisites :
+    
+    # The original POD test
+        undef $main::_STDOUT_;
     undef $main::_STDERR_;
 
-    undef $main::_STDOUT_;
+};
+SKIP: {
+    # A header testing whether we find all prerequisites :
+    
+    # The original POD test
+        undef $main::_STDOUT_;
     undef $main::_STDERR_;
 eval q{
   my $example = sub {
@@ -238,6 +308,12 @@ eval q{
 };
 is($@, '', "example from line 215");
 
-    undef $main::_STDOUT_;
+};
+SKIP: {
+    # A header testing whether we find all prerequisites :
+    
+    # The original POD test
+        undef $main::_STDOUT_;
     undef $main::_STDERR_;
 
+};
