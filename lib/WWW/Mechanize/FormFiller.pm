@@ -34,6 +34,7 @@ sub new {
   if (exists $args{default}) {
     my ($class,@args) = @{$args{default}};
     load_value_class($class);
+    no strict 'refs';
     $self->{default} = "WWW::Mechanize::FormFiller::Value::$class"->new(undef, @args);
   };
 
@@ -42,7 +43,7 @@ sub new {
       for my $value (@{$args{values}}) {
         if (ref $value eq 'ARRAY') {
           my ($name,$class,@args) = @$value;
-          if (defined $class and $class) {
+          if ($class) {
             $self->add_filler( $name, $class, @args );
           } else {
             Carp::croak "Each element of the values array must have at least 2 elements (name and class)" unless defined $class;
@@ -73,7 +74,11 @@ sub add_filler {
 
 sub add_value {
   my ($self, $name, $value) = @_;
-  $self->{values}->{$name} = $value;
+  if (ref $name and UNIVERSAL::isa($name,'Regexp')) {
+    $self->{values}->{byre}->{$name} = $value;
+  } else {
+    $self->{values}->{byname}->{$name} = $value;
+  };
   $value;
 };
 
@@ -84,18 +89,31 @@ sub default {
   $result;
 };
 
+sub find_filler {
+  my ($self,$input) = @_;
+  croak "No input given" unless defined $input;
+  my $value;
+  if (exists $self->{values}->{byname}->{$input->name()}) {
+    $value = $self->{values}->{byname}->{$input->name};
+  } elsif (grep { $input->name =~ /$_/ } keys %{$self->{values}->{byre}}) {
+    my $match = (grep { $input->name =~ /$_/ } keys %{$self->{values}->{byre}})[0];
+    $value = $self->{values}->{byre}->{$match};
+  } elsif ($input->type eq "image") {
+    # Image inputs are really buttons, and if they have no (user) specified value,
+    # we don't ask about them.
+  } elsif ($self->default) {
+    $value = $self->default();
+  };
+  $value;
+};
+
 sub fill_form {
   my ($self,$form) = @_;
+  #for (keys %{$self->{values}}) {
+  #  warn $_, " ", ref $_;
+  #};
   for my $input ($form->inputs) {
-    my $value;
-    if (exists $self->{values}->{$input->name()}) {
-      $value = $self->{values}->{$input->name};
-    } elsif ($input->type eq "image") {
-      # Image inputs are really buttons, and if they have no (user) specified value,
-      # we don't ask about them.
-    } elsif ($self->default) {
-      $value = $self->default();
-    };
+    my $value = $self->find_filler($input);
     # We leave all values alone whenever we don't know what to do with them
     if (defined $value) {
       # Hmm - who cares about whether a value was hidden/readonly ??
@@ -172,6 +190,50 @@ WWW::Mechanize::FormFiller - framework to automate HTML forms
 =for example_testing
   $_STDOUT_ =~ s/[\x0a\x0d]+$//;
   is($_STDOUT_,"GET http://www.google.com/search?q=Corion+Homepage&btnG=Google+Search&secretValue=0xDEADBEEF",'Got the expected HTTP query string');
+  
+Form fields can be specified by name or by a regular expression. A
+field specified by name takes precedence over a matching regular
+expression.
+
+=for example
+  use WWW::Mechanize::FormFiller;
+  use HTML::Form;
+
+=begin example
+
+  my $html = "<html><body><form name='f' action='http://www.example.com/'>
+      <input type='text' name='date_birth_spouse' value='' />
+      <input type='text' name='date_birth' value='' />
+      <input type='text' name='date_birth_kid_1' value='' />
+      <input type='text' name='date_birth_kid_2' value='' />
+      <input type='submit' name='fool'>
+    </form></body></html>";
+
+  my $f = WWW::Mechanize::FormFiller->new(
+      values => [
+                 [date_birth => Fixed => "01.01.1970"],
+                 
+                 # We are less discriminate with the other dates
+                 [qr/date_birth/ => 'Random::Date' => string => '%d.%m.%Y'],
+  							]);
+  my $form = HTML::Form->parse($html,"http://www.example.com");
+  $f->fill_form($form);
+
+  my $request = $form->click("fool");
+  # Now we have a complete HTTP request, which we can hand off to
+  # LWP::UserAgent or (preferrably) WWW::Mechanize
+
+  print $request->as_string;
+
+=end example
+
+=for example_testing
+  $_STDOUT_ =~ s/[\x0a\x0d]+$//;
+  like($_STDOUT_,qr"^GET\shttp://www\.example\.com/
+  	\?date_birth_spouse=\d\d.\d\d.\d\d\d\d
+  	\&date_birth=01.01.1970
+  	\&date_birth_kid_1=\d\d.\d\d.\d\d\d\d
+  	\&date_birth_kid_2=\d\d.\d\d.\d\d\d\d$"x,'Got the expected HTTP query string');
 
 You are not limited to fixed form values - callbacks and interactive
 editing are also already provided :

@@ -23,7 +23,7 @@ $f = WWW::Mechanize::FormFiller->new( default => [Default => "foo"],
                                                 ]);
 isa_ok($f,"WWW::Mechanize::FormFiller");
 isa_ok($f->{default},"WWW::Mechanize::FormFiller::Value::Default","Default value");
-is(scalar keys %{$f->{values}}, 3, "Correct number of values gets stored");
+is(scalar keys %{$f->{values}->{byname}}, 3, "Correct number of values gets stored");
 
 $f = WWW::Mechanize::FormFiller->new(values => [[ login => Fixed => "root" ]]);
 my $v = WWW::Mechanize::FormFiller::Value::Fixed->new(undef,"secret");
@@ -31,8 +31,8 @@ $f->add_value(password => $v);
 $f->add_value(password_confirm => $v);
 isa_ok($f,"WWW::Mechanize::FormFiller");
 is($f->{default},undef,"Passing in no default results in no default being set");
-is(scalar keys %{$f->{values}}, 3, "Correct number of values gets stored");
-is($f->{values}->{password}, $f->{values}->{password_confirm}, "Duplicate values get stored only once");
+is(scalar keys %{$f->{values}->{byname}}, 3, "Correct number of values gets stored");
+is($f->{values}->{byname}->{password}, $f->{values}->{byname}->{password_confirm}, "Duplicate values get stored only once");
 
 my $croaked;
 {
@@ -99,7 +99,7 @@ SKIP: {
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout($form, name => 'Mark' );
-  isa_ok($f,WWW::Mechanize::FormFiller);
+  isa_ok($f,'WWW::Mechanize::FormFiller');
   is($form->value('name'),'Mark','fillout has a default of Fixed');
 };
 
@@ -111,7 +111,7 @@ SKIP: {
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout($form, name => [ Random => 'Mark' ]);
-  isa_ok($f,WWW::Mechanize::FormFiller);
+  isa_ok($f,'WWW::Mechanize::FormFiller');
   is($form->value('name'),'Mark','Other classes work as well');
 };
 
@@ -123,6 +123,6 @@ SKIP: {
   <input name=name value=none />
   </form>','http://www.example.com');
   $f = WWW::Mechanize::FormFiller->fillout(name => [ Random => 'Mark' ], $form);
-  isa_ok($f,WWW::Mechanize::FormFiller);
+  isa_ok($f,'WWW::Mechanize::FormFiller');
   is($form->value('name'),'Mark','The place of $form is irrelevant');
 };
