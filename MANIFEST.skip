@@ -1,4 +1,5 @@
 ^.cvsignore
+^t/.cvsignore
 ^.lwpcookies
 ^.releaserc
 ^blib/
