@@ -4,7 +4,7 @@ use Carp;
 
 use vars qw( $VERSION @ISA );
 
-$VERSION = '0.04';
+$VERSION = '0.05';
 @ISA = ();
 
 sub load_value_class {
@@ -112,7 +112,7 @@ sub fillout {
   my $self_class = shift;
   my $self = ref $self_class ? $self_class : $self_class->new();
   my $form;
-  
+
   while (@_) {
     if (ref $_[0] and eval { UNIVERSAL::isa($_[0],'HTML::Form') }) {
       croak "Two HTML::Form objects passed into fillout()" if ($form);
@@ -154,7 +154,7 @@ WWW::Mechanize::FormFiller - framework to automate HTML forms
       <input type='hidden' name='secretValue' value='0xDEADBEEF' />
     </form></body></html>";
 
-  my $f = WWW::Mechanize::FormFiller->new( 
+  my $f = WWW::Mechanize::FormFiller->new(
       values => [
                  [q => Fixed => "Corion Homepage"],
   							]);
@@ -164,7 +164,7 @@ WWW::Mechanize::FormFiller - framework to automate HTML forms
   my $request = $form->click("btnG");
   # Now we have a complete HTTP request, which we can hand off to
   # LWP::UserAgent or (preferrably) WWW::Mechanize
-  
+
   print $request->as_string;
 
 =end example
@@ -301,7 +301,7 @@ to the following examples :
 =for example end
 
 =for example_testing
-  isa_ok($filler,"WWW::Mechanize::FormFiller");  
+  isa_ok($filler,"WWW::Mechanize::FormFiller");
 
 =for example
   $form = HTML::Form->parse('<html><body><form>
@@ -313,13 +313,13 @@ to the following examples :
 
   $filler = WWW::Mechanize::FormFiller->new();
   $filler->fillout(
-    # If the first parameter isa HTML::Form, it is 
+    # If the first parameter isa HTML::Form, it is
     # filled out directly
     $form,
     name => 'Mark',
     motto => [ 'Random::Word', size => 5 ],
   );
-  
+
 =for example end
 
 =for example_testing
@@ -336,7 +336,7 @@ to the following examples :
 
   # This works as a direct constructor as well
   WWW::Mechanize::FormFiller->fillout(
-    $form2,  
+    $form2,
     name => 'Mark',
     motto => [ 'Random::Word', size => 5 ],
   );
