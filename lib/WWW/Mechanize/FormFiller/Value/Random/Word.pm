@@ -2,8 +2,8 @@ package WWW::Mechanize::FormFiller::Value::Random::Word;
 use base 'WWW::Mechanize::FormFiller::Value';
 
 use vars qw( $VERSION );
-use Data::Random qw(rand_words); 
-$VERSION = '0.03';
+use Data::Random qw(rand_words);
+$VERSION = '0.04';
 
 sub new {
   my ($class,$name,@args) = @_;
@@ -15,7 +15,7 @@ sub new {
 
 sub value {
   my ($self,$input) = @_;
-  (@{rand_words( @{$self->{args}} )})[0];
+  return join " ", @{rand_words( @{$self->{args}} )};
 };
 
 1;
@@ -36,7 +36,6 @@ WWW::Mechanize::FormFiller::Value::Random::Word - Fill a word into an HTML form 
   my $f = WWW::Mechanize::FormFiller->new();
 
   # Create a random value for the HTML field "login"
-
   my $login = WWW::Mechanize::FormFiller::Value::Random::Word->new( login => size => 1 );
   $f->add_value( login => $login );
 
@@ -46,6 +45,9 @@ WWW::Mechanize::FormFiller::Value::Random::Word - Fill a word into an HTML form 
   # If there is no password, put a random one out of the list there
   my $password = $f->add_filler( password => Random::Word => size => 1 );
 
+  # Spew some bogus text into the comments field
+  my $comments = $f->add_filler( comments => Random::Word => size => 10 );
+
 =for example end
 
 =for example_testing
@@ -53,10 +55,14 @@ WWW::Mechanize::FormFiller::Value::Random::Word - Fill a word into an HTML form 
   my $form = HTML::Form->parse('<html><body><form method=get action=/>
   <input type=text name=login />
   <input type=text name=password />
+  <input type=text name=comments />
   </form></body></html>','http://www.example.com/');
   $f->fill_form($form);
   like( $form->value('login'), qr/^(\w+)$/, "Login gets set");
   like( $form->value('password'), qr/^(\w+)$/, "Password gets set");
+  my @words = split(" ", $form->value('comments'));
+  is( scalar @words, 10, "Comments get set")
+    or diag "Words found : ",$form->value('comments');
 
 =head1 DESCRIPTION
 

@@ -4,7 +4,7 @@ use Carp qw(croak);
 
 use vars qw( $VERSION );
 use POSIX;
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 sub new {
   my ($class,$name,%args) = @_;
@@ -12,9 +12,9 @@ sub new {
   %args = (string => '%Y%m%d') unless scalar (keys %args);
   $args{min} ||= undef;
   $args{max} ||= undef;
-  
+
   $self->{args} = \%args;
-  
+
   $self;
 };
 
@@ -29,12 +29,12 @@ sub value {
   };
   croak "Minimum timestamp is greater or equal maximum timestamp"
     if defined $max and defined $min and $max le $min;
-  
+
   my $result;
   RANDOM: {
     my $timestamp = rand(0x7FFFFFFF);
-    warn $self->{args}->{string};
-    warn gmtime($timestamp);
+    #warn $self->{args}->{string};
+    #warn gmtime($timestamp);
     $result = strftime $self->{args}->{string}, gmtime($timestamp);
     redo RANDOM if defined $min and $result lt $min;
     redo RANDOM if defined $max and $result ge $max;
@@ -61,7 +61,7 @@ WWW::Mechanize::FormFiller::Value::Random::Date - Fill a timestamp into an HTML 
 
   # Create a random value for the HTML field "born"
 
-  my $born = WWW::Mechanize::FormFiller::Value::Random::Date->new( 
+  my $born = WWW::Mechanize::FormFiller::Value::Random::Date->new(
     born => string => '%Y%m%d', min => '20000101', max => '20373112' );
   $f->add_value( born => $born );
 

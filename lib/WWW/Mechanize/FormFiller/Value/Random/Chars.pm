@@ -4,7 +4,7 @@ use strict;
 
 use vars qw( $VERSION );
 use Data::Random qw(rand_chars);
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 sub new {
   my ($class,$name,@args) = @_;
@@ -38,7 +38,7 @@ WWW::Mechanize::FormFiller::Value::Random::Chars - Fill characters into an HTML 
 
   # Create a random value for the HTML field "login"
 
-  my $login = WWW::Mechanize::FormFiller::Value::Random::Chars->new( 
+  my $login = WWW::Mechanize::FormFiller::Value::Random::Chars->new(
                        login => set => 'alpha', min => 3, max => 8 );
   $f->add_value( login => $login );
 

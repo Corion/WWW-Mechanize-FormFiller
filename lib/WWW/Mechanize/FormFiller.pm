@@ -4,7 +4,7 @@ use Carp;
 
 use vars qw( $VERSION @ISA );
 
-$VERSION = 0.03;
+$VERSION = '0.04';
 @ISA = ();
 
 sub load_value_class {
@@ -274,6 +274,12 @@ The following WWW::Mechanize::FormFiller::Value subclasses are currently distrib
 
 =item L<WWW::Mechanize::FormFiller::Value::Random>
 
+=item L<WWW::Mechanize::FormFiller::Value::Random::Word>
+
+=item L<WWW::Mechanize::FormFiller::Value::Random::Chars>
+
+=item L<WWW::Mechanize::FormFiller::Value::Random::Date>
+
 =back
 
 =head2 EXPORT
@@ -291,6 +297,8 @@ Copyright (C) 2002,2003 Max Maischein
 Max Maischein, E<lt>corion@cpan.orgE<gt>
 
 Please contact me if you find bugs or otherwise improve the module. More tests are also very welcome !
+
+Bug reports are best done via RT at https://rt.cpan.org
 
 =head1 SEE ALSO
 
