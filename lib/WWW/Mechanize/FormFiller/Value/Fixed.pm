@@ -23,7 +23,7 @@ WWW::Mechanize::FormFiller::Value::Fixed - Fill a fixed value into an HTML form 
 
 =head1 SYNOPSIS
 
-=begin example
+=for example begin
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Fixed;
@@ -38,7 +38,7 @@ WWW::Mechanize::FormFiller::Value::Fixed - Fill a fixed value into an HTML form 
   # field to the list as well :
   my $password = $f->add_filler( password => Fixed => "secret" );
 
-=end example
+=for example end
 
 =head1 DESCRIPTION
 

@@ -14,6 +14,7 @@ sub new {
 
 sub value {
   my ($self,$input) = @_;
+  #my @values = @{$self->{values}};
   my @values = $self->{values};
   my $count = length @values;
 
@@ -35,7 +36,7 @@ WWW::Mechanize::FormFiller::Value::Random - Randomly fill out a HTML form field
 
 =head1 SYNOPSIS
 
-=begin example
+=for example begin
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Random;
@@ -53,7 +54,7 @@ WWW::Mechanize::FormFiller::Value::Random - Randomly fill out a HTML form field
   # If there is no password, put a random one out of the list there
   my $password = $f->add_filler( password => Random => "foo","bar","baz" );
 
-=end example
+=for example end
 
 =head1 DESCRIPTION
 

@@ -23,7 +23,7 @@ WWW::Mechanize::FormFiller::Value::Keep - Leave an HTML field alone
 
 =head1 SYNOPSIS
 
-=begin example
+=for example begin
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Keep;
@@ -38,7 +38,7 @@ WWW::Mechanize::FormFiller::Value::Keep - Leave an HTML field alone
   # field to the list as well :
   my $sessionid = $f->add_filler( session => Keep );
 
-=end example
+=for example end
 
 =head1 DESCRIPTION
 

@@ -31,7 +31,7 @@ WWW::Mechanize::FormFiller::Value::Interactive - Ask the user to fill out a HTML
 
 =head1 SYNOPSIS
 
-=begin example
+=for example begin
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Interactive;
@@ -48,7 +48,7 @@ WWW::Mechanize::FormFiller::Value::Interactive - Ask the user to fill out a HTML
   # "Ask the user for the password"
   my $password = $f->add_filler( password => Interactive );
 
-=end example
+=for example end
 
 =head1 DESCRIPTION
 

@@ -27,7 +27,7 @@ WWW::Mechanize::FormFiller::Value::Callback - Call Perl code to fill out a HTML 
 
 =head1 SYNOPSIS
 
-=begin example
+=for example begin
 
   use WWW::Mechanize::FormFiller;
   use WWW::Mechanize::FormFiller::Value::Callback;
@@ -50,7 +50,7 @@ WWW::Mechanize::FormFiller::Value::Callback - Call Perl code to fill out a HTML 
   # "If there is no password, put a nice number there
   my $password = $f->add_filler( password => Callback => sub { int rand(100) } );
 
-=end example
+=for example end
 
 =head1 DESCRIPTION
 
