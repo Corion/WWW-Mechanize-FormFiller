@@ -1,7 +1,6 @@
 blib
 Makefile
-WWW-Mechanize-Shell-0.05
-WWW-Mechanize-Shell-*
+WWW-Mechanize-FormFiller-*
 *.old
 *.tar.gz
 pm_to_blib
