@@ -1,4 +1,5 @@
 .cvsignore
+.lwpcookies
 .releaserc
 blib
 WWW-Mechanize-Shell-*
