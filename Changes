@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Mechanize::FormFiller.
 
+0.08 20071009
+  - Rerelease because the old one went missing
+  - No need to upgrade
+
 0.07 20071007
   - Rerelease because the old one went missing
   - No need to upgrade
