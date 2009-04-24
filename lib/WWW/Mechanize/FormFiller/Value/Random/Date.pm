@@ -136,5 +136,5 @@ Please contact me if you find bugs or otherwise improve the module. More tests a
 =head1 SEE ALSO
 
 L<Data::Random>,
-L<WWW::Mechanize>,L<WWW::Mechanize::Shell>,L<WWW::Mechanize::FormFiller>,L<WWW::Mechanize::FormFiller::Value::Value>,
-L<WWW::Mechanize::FormFiller::Value::Default>,L<WWW::Mechanize::FormFiller::Value::Fixed>,L<WWW::Mechanize::FormFiller::Value::Interactive>
+L<WWW::Mechanize>, L<WWW::Mechanize::Shell>, L<WWW::Mechanize::FormFiller>, L<WWW::Mechanize::FormFiller::Value::Value>,
+L<WWW::Mechanize::FormFiller::Value::Default>, L<WWW::Mechanize::FormFiller::Value::Fixed>, L<WWW::Mechanize::FormFiller::Value::Interactive>
