@@ -385,7 +385,7 @@ to the following examples :
 =for example_testing
   isa_ok($filler,"WWW::Mechanize::FormFiller");
   is($form->value('name'),'Mark','Name is set');
-  like($form->value('motto'),qr/^\w+( \w+){3} \w+$/,'Motto is set');
+  like($form->value('motto'),qr/^[-'\w]+( [-'\w]+){3} [-'\w]+$/,'Motto is set');
 
 =for example
   $form2 = HTML::Form->parse('<html><body><form>
@@ -406,7 +406,7 @@ to the following examples :
 =for example_testing
   isa_ok($filler,"WWW::Mechanize::FormFiller");
   is($form2->value('name'),'Mark','Name is set');
-  like($form2->value('motto'),qr/^\w+( \w+){3} \w+$/,'Motto is set');
+  like($form->value('motto'),qr/^[-'\w]+( [-'\w]+){3} [-'\w]+$/,'Motto is set');
 
 =back
 

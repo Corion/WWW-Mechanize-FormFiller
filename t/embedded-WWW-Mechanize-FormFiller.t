@@ -585,7 +585,7 @@ SKIP: {
 
   isa_ok($filler,"WWW::Mechanize::FormFiller");
   is($form->value('name'),'Mark','Name is set');
-  like($form->value('motto'),qr/^\w+( \w+){3} \w+$/,'Motto is set');
+  like($form->value('motto'),qr/^[-'\w]+( [-'\w]+){3} [-'\w]+$/,'Motto is set');
 
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
@@ -660,7 +660,7 @@ SKIP: {
 
   isa_ok($filler,"WWW::Mechanize::FormFiller");
   is($form2->value('name'),'Mark','Name is set');
-  like($form2->value('motto'),qr/^\w+( \w+){3} \w+$/,'Motto is set');
+  like($form->value('motto'),qr/^[-'\w]+( [-'\w]+){3} [-'\w]+$/,'Motto is set');
 
     undef $main::_STDOUT_;
     undef $main::_STDERR_;
