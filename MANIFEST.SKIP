@@ -10,3 +10,5 @@ CVS/
 .tar.gz$
 .old$
 ^Makefile$
+.*.bak
+MYMETA\..*
