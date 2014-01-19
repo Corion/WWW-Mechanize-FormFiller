@@ -1,5 +1,10 @@
 Revision history for Perl extension WWW::Mechanize::FormFiller.
 
+0.11 20140119
+  . Test fix, no need to update
+  - Data::Random returns words containing ' or - ; adjust tests for that
+    Thanks to Slaven Rezic for reporting this as RT #91944
+
 0.10 20090424
   . Distribution fix, no need to update
   - added MANIFEST.skip to distribution
