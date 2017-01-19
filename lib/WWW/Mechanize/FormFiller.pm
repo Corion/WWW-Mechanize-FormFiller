@@ -4,7 +4,7 @@ use Carp;
 
 use vars qw( $VERSION @ISA );
 
-$VERSION = '0.11';
+$VERSION = '0.12';
 @ISA = ();
 
 sub load_value_class {

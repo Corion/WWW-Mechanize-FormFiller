@@ -1,4 +1,4 @@
-WWW/Mechanize/FormFiller version 0.01
+WWW/Mechanize/FormFiller version 0.12
 =====================================
 
 WWW::Mechanize::FormFiller and its submodules are useful to automate
@@ -22,9 +22,12 @@ This module requires these other modules and libraries:
 
   Test::More for the tests
   HTML::Form for the filling of HTML forms
+  HTML::Tagset
+
+See Makefile.PL for a complete list of the prerequisites.
 
 COPYRIGHT AND LICENCE
 
 These modules may be used under the same terms as Perl itself
 
-Copyright (C) 2002,2003 Max Maischein, corion@cpan.org
+Copyright (C) 2002,2017 Max Maischein, corion@cpan.org

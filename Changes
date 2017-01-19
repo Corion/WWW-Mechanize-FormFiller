@@ -1,5 +1,9 @@
 Revision history for Perl extension WWW::Mechanize::FormFiller.
 
+0.12 20170119
+  . Prerequisite fix, no need to update
+  - Data::Tagset was not listed as an installation prerequisite
+
 0.11 20140119
   . Test fix, no need to update
   - Data::Random returns words containing ' or - ; adjust tests for that
