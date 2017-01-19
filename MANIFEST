@@ -26,11 +26,6 @@ t/04-FF-api.t
 t/05-Form-1.t
 t/06-Form-Image-Button.t
 t/07-FF-Value-Random.t
-t/99-manifest.t
-t/99-pod.t
-t/99-todo.t
-t/99-unix-text.t
-t/99-versions.t
 t/embedded-WWW-Mechanize-FormFiller-Value-Callback.t
 t/embedded-WWW-Mechanize-FormFiller-Value-Default.t
 t/embedded-WWW-Mechanize-FormFiller-Value-Fixed.t
@@ -42,3 +37,10 @@ t/embedded-WWW-Mechanize-FormFiller-Value-Random-Word.t
 t/embedded-WWW-Mechanize-FormFiller-Value-Random.t
 t/embedded-WWW-Mechanize-FormFiller-Value.t
 t/embedded-WWW-Mechanize-FormFiller.t
+xt/99-changes.t
+xt/99-compile.t
+xt/99-manifest.t
+xt/99-pod.t
+xt/99-todo.t
+xt/99-unix-text.t
+xt/99-versions.t
