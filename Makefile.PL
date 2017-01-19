@@ -7,9 +7,9 @@ use lib 'lib';
 WriteMakefile(
     'NAME'    => 'WWW::Mechanize::FormFiller',
     'VERSION_FROM'  => 'lib/WWW/Mechanize/FormFiller.pm', # finds $VERSION
-    'PREREQ_PM'    => { 'HTML::Form' => undef,
-			'Test::More' => undef,
-			'HTML::Tagset' => undef,
+    'PREREQ_PM'    => { 'HTML::Form' => 0,
+			'Test::More' => 0,
+			'HTML::Tagset' => 0,
     			'Data::Random' => 0.05,
     		}, # e.g., Module::Name => 1.1
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
