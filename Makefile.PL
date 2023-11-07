@@ -12,6 +12,24 @@ WriteMakefile(
 			'HTML::Tagset' => 0,
     			'Data::Random' => 0.05,
     		}, # e.g., Module::Name => 1.1
+    'LICENSE' => 'perl_5',
+     META_MERGE => {
+        "meta-spec" => { version => 2 },
+        resources => {
+            repository => {
+                web => "https://github.com/Corion/WWW-Mechanize-FormFiller",
+                url => "git://github.com/Corion/WWW-Mechanize-FormFiller.git",
+                type => 'git',
+            },
+            bugtracker  => {
+              web    => "https://github.com/Corion/WWW-Mechanize-FormFiller/issues",
+            },
+            license    => "https://dev.perl.org/licenses/",
+        },
+        dynamic_config   => 0, # we promise to keep META.* up-to-date
+        x_static_install => 1, # we are pure Perl and don't do anything fancy
+    },
+
     ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
       (ABSTRACT_FROM => 'lib/WWW/Mechanize/FormFiller.pm', # retrieve abstract from module
        AUTHOR     => 'Max Maischein <corion@cpan.org>') : ()),
